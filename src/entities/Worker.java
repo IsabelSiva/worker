@@ -65,7 +65,7 @@ public class Worker {
         contracts.remove(contract);
     }
     public double income(int year, int month){
-        double income = 0;
+        double income = baseSalary;
         Calendar calendar = Calendar.getInstance();
 
         for(HourContract c : contracts){
@@ -73,10 +73,18 @@ public class Worker {
             int contractYear = calendar.get(Calendar.YEAR);
             int contractMonth = calendar.get(Calendar.MONTH);
 
-            if (contractYear == year && contractMonth == month){
-                income = baseSalary + c.totalValue();
-            }
+            if (contractYear == year && contractMonth == month){income += c.totalValue();}
         }
         return income;
+    }
+
+    @Override
+    public String toString() {
+        return "Worker{" +
+                "name='" + name + '\'' +
+                ", level=" + level +
+                ", baseSalary=" + baseSalary +
+                ", department=" + department +
+                '}';
     }
 }
